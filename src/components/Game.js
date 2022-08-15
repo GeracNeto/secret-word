@@ -1,6 +1,27 @@
+// CSS
 import './Game.css'
 
+// React
+import { useRef, useState } from 'react'
+
 const Game = ({ verifyLetter, pickedWord, pickedCategory, letters, guessedLetters, wrongLetters, guesses, score }) => {
+
+    const [letter, setLetter] = useState('')
+    
+    const letterInputRef = useRef(null) // Referência
+
+    // Função chamada quando o formulário é enviado (clicaado no botão 'jogar')
+    const handleSubmit = (e) => {
+
+        e.preventDefault() // Faz com que a página não recarregue
+
+        verifyLetter(letter) // Faz a verificação da letra
+
+        setLetter('') // Limpa o input
+
+        letterInputRef.current.focus() // Foca no elemento input após clicar em 'Jogar'
+    }
+
     return (
         <div className='game'>
             <p className='points'>
@@ -20,8 +41,8 @@ const Game = ({ verifyLetter, pickedWord, pickedCategory, letters, guessedLetter
             </div>
             <div className="letterContainer">
                 <p>Tente adivinhar uma letra da palavra:</p>
-                <form>
-                    <input type="text" name='letter' maxLength='1' required />
+                <form onSubmit={handleSubmit}>
+                    <input type="text" name='letter' maxLength='1' required onChange={e => setLetter(e.target.value)} value={letter} ref={letterInputRef}/>
                     <button>Jogar!</button>
                 </form>
             </div>
