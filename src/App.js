@@ -24,8 +24,40 @@ function App() {
   const [gameStage, setGameStage] = useState(stages[0].name)
   const [words] = useState(wordsList)
 
+  const [pickedWord, setPickedWord] = useState('')
+  const [pickedCategory, setPickedCategory] = useState('')
+  const [letters, setLetters] = useState([])
+
+  // Generates the category and word randomly
+  const pickWordandCategory = () => {
+
+    // Pick a ramdom category
+    const categories = Object.keys(words) // Cria uma array contendo as chaves do obejto wordsList
+    const category = categories[Math.floor(Math.random() * Object.keys(categories).length)] // Armazena uma das chaves do objeto wordsList -> É gerado um número aleatório dentro do tamanho da lista como indice do array
+    //console.log(category)
+
+    // Pick a romdom word
+    const word = wordsList[category][Math.floor(Math.random() * wordsList[category].length)] // Armaznea uma palavra da categoria de forma aleatória
+    //console.log(word)
+
+    return {word, category}
+  }
+
   // Starts the secret word game
   const startGame = () => {
+
+    // pick word and pick category
+    const { word, category } = pickWordandCategory() // Destructuring 
+    //console.log(category, word)
+
+    // Create an array of letters
+    let wordLetters = word.split('') // Separa as letras da palavra em um array
+    wordLetters = wordLetters.map(letter => letter.toLowerCase()) // Faz com que todas as letras fiquem minúsculas
+    //console.log(wordLetters)
+
+    setPickedCategory(category)
+    setPickedWord(word)
+    setLetters(letters)
     setGameStage(stages[1].name)
   }
 
@@ -43,7 +75,7 @@ function App() {
     <div className="App">
       {gameStage === 'start' && <StartScreen startGame={startGame} />}
       {gameStage === 'game' && <Game verifyLetter={verifyLetter} />}
-      {gameStage === 'end' && <GameOver retry={retry}/>}
+      {gameStage === 'end' && <GameOver retry={retry} />}
 
     </div>
   );
