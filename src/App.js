@@ -21,12 +21,18 @@ const stages = [
 
 function App() {
 
+  // States
   const [gameStage, setGameStage] = useState(stages[0].name)
   const [words] = useState(wordsList)
 
   const [pickedWord, setPickedWord] = useState('')
   const [pickedCategory, setPickedCategory] = useState('')
   const [letters, setLetters] = useState([])
+
+  const [guessedLetters, setGuessedLetters] = useState([])
+  const [wrongLetters, setWrongLetters] = useState([])
+  const [guesses, setGuesses] = useState(3)
+  const [score, setScore] = useState(0)
 
   // Generates the category and word randomly
   const pickWordandCategory = () => {
@@ -48,16 +54,16 @@ function App() {
 
     // pick word and pick category
     const { word, category } = pickWordandCategory() // Destructuring 
-    //console.log(category, word)
+    console.log(category, word)
 
     // Create an array of letters
     let wordLetters = word.split('') // Separa as letras da palavra em um array
     wordLetters = wordLetters.map(letter => letter.toLowerCase()) // Faz com que todas as letras fiquem minúsculas
-    //console.log(wordLetters)
+    console.log(wordLetters)
 
     setPickedCategory(category)
     setPickedWord(word)
-    setLetters(letters)
+    setLetters(wordLetters)
     setGameStage(stages[1].name)
   }
 
@@ -74,7 +80,7 @@ function App() {
   return (
     <div className="App">
       {gameStage === 'start' && <StartScreen startGame={startGame} />}
-      {gameStage === 'game' && <Game verifyLetter={verifyLetter} />}
+      {gameStage === 'game' && <Game verifyLetter={verifyLetter} pickedWord={pickedWord} pickedCategory={pickedCategory} letters={letters} guessedLetters={guessedLetters} wrongLetters={wrongLetters} guesses={guesses} score={score} />}
       {gameStage === 'end' && <GameOver retry={retry} />}
 
     </div>
