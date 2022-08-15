@@ -40,7 +40,7 @@ function App() {
     const word = wordsList[category][Math.floor(Math.random() * wordsList[category].length)] // Armaznea uma palavra da categoria de forma aleatória
     //console.log(word)
 
-    return {word, category}
+    return { word, category }
   }
 
   // Starts the secret word game
