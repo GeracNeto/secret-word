@@ -10,9 +10,9 @@ const Game = ({ verifyLetter }) => {
             <h3 className='tip'>
                 Dica sobre a palavra: <span>Dica...</span>
             </h3>
-            <div className="wordConatiner">
+            <div className="wordContainer">
                 <span className='letter'>A</span>
-                <span className="blackSquare"></span>
+                <span className="blankSquare"></span>
             </div>
             <div className="letterContainer">
                 <p>Tente adivinhar uma letra da palavra:</p>
