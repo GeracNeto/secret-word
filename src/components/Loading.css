@@ -1,0 +1,30 @@
+@keyframes loading-animation{
+    0%{
+        transform: rotate(1turn);
+    }
+    50%{
+        transform: rotate(-1turn);
+        border-radius: 20px;
+    }
+    100%{
+        transform: rotate(1turn);
+        border-radius: 50px;
+    }
+}
+
+.loading{
+    margin-top: 100px;
+    width: 50px;
+    height: 50px;
+
+    border: 6px solid #f2f2f2;
+    border-top-color: #ff6600;
+
+    animation-name: loading-animation;
+    animation-duration: 3s;
+}
+
+#loading-p{
+    margin-top: 50px;
+    color: #f2f2f2;
+}
