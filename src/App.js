@@ -70,7 +70,7 @@ function App() {
     setPickedCategory(category)
     setPickedWord(word)
     setLetters(wordLetters)
-    setGameStage(stages[1].name)
+    setTimeout(() => setGameStage(stages[1].name), 3000)
   }, [pickWordandCategory])
 
   // Process the letter input
