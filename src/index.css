@@ -7,16 +7,17 @@ body {
     margin: 0;
     padding: 0;
 
-    background: linear-gradient(180deg, rgba(9, 35, 175, 1) 0%, rgba(0, 0, 0, 1) 100%);
-    
+    background: rgb(3,34,63);
+    background: linear-gradient(180deg, rgba(3,34,63,1) 0%, rgba(0,0,0,1) 100%);
+
     font-family: helvetica;
-    color: #fff;
+    color: #f2f2f2;
 }
 
-button{
+button {
     background-color: #1646a0;
 
-    color: #fff;
+    color: #f2f2f2;
     text-transform: uppercase;
     font-weight: bold;
     font-size: 1.2em;
@@ -27,10 +28,11 @@ button{
     height: 50px;
     padding: 0 45px;
 
-    border: 2px solid #fff;
+    border: 2px solid #f2f2f2;
     border-radius: 25px;
 }
 
-button:hover{
+button:hover {
     background-color: #0923af;
+    transform: translateY(5px);
 }
