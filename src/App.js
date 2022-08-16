@@ -2,7 +2,7 @@
 import './App.css';
 
 // React
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 // data
 import { wordsList } from './data/words';
@@ -38,7 +38,7 @@ function App() {
   const [score, setScore] = useState(0)
 
   // Generates the category and word randomly
-  const pickWordandCategory = () => {
+  const pickWordandCategory = useCallback(() => {
 
     // Pick a ramdom category
     const categories = Object.keys(words) // Cria uma array contendo as chaves do obejto wordsList
@@ -50,10 +50,13 @@ function App() {
     //console.log(word)
 
     return { word, category }
-  }
+  }, [words])
 
   // Starts the secret word game
-  const startGame = () => {
+  const startGame = useCallback(() => {
+
+    // Clear All letters
+    clearLetterStages()
 
     // pick word and pick category
     const { word, category } = pickWordandCategory() // Destructuring 
@@ -68,7 +71,7 @@ function App() {
     setPickedWord(word)
     setLetters(wordLetters)
     setGameStage(stages[1].name)
-  }
+  }, [pickWordandCategory])
 
   // Process the letter input
   const verifyLetter = (letter) => {
@@ -86,9 +89,10 @@ function App() {
     }
     else {
       setWrongLetters(actualWrongLetter => [...actualWrongLetter, normalizedLetter])
-    }
 
-    setGuesses(guesses - 1)
+      // Get value from previous guesses and subtracts -1 
+      setGuesses(prevGuesses => prevGuesses - 1)
+    }
   }
 
   const clearLetterStages = () => {
@@ -96,6 +100,7 @@ function App() {
     setWrongLetters([])
   }
 
+  // Check if guesses ended
   // Whenever const guesses reach to 0, the program switches to "Game Over" page
   useEffect(() => {
 
@@ -108,6 +113,24 @@ function App() {
       setGameStage(stages[2].name)
     }
   }, [guesses])
+
+  //Check win condition
+  useEffect(() => {
+
+    const uniqueLetters = [...new Set(letters)]
+    //console.log(uniqueLetters)
+
+    // Win condition
+    if (guessedLetters.length === uniqueLetters.length && gameStage === stages[1].name) {
+      // Add score
+      setScore(prevScore => prevScore += 100)
+
+      // Restart game with new word
+      startGame()
+    }
+
+  }, [guessedLetters, letters, startGame, gameStage])
+
 
   //console.log(guessedLetters)
   //console.log(wrongLetters)
@@ -125,7 +148,7 @@ function App() {
     <div className="App">
       {gameStage === 'start' && <StartScreen startGame={startGame} />}
       {gameStage === 'game' && <Game verifyLetter={verifyLetter} pickedWord={pickedWord} pickedCategory={pickedCategory} letters={letters} guessedLetters={guessedLetters} wrongLetters={wrongLetters} guesses={guesses} score={score} />}
-      {gameStage === 'end' && <GameOver retry={retry} score={score}/>}
+      {gameStage === 'end' && <GameOver retry={retry} score={score} />}
 
     </div>
   );

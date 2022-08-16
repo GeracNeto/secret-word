@@ -42,7 +42,7 @@ const Game = ({ verifyLetter, pickedWord, pickedCategory, letters, guessedLetter
             <div className="letterContainer">
                 <p>Tente adivinhar uma letra da palavra:</p>
                 <form onSubmit={handleSubmit}>
-                    <input type="text" name='letter' maxLength='1' required onChange={e => setLetter(e.target.value)} value={letter} ref={letterInputRef} />
+                    <input type="text" name='letter' maxLength='1' required autoFocus onChange={e => setLetter(e.target.value)} value={letter} ref={letterInputRef} />
                     <button>Jogar!</button>
                 </form>
             </div>
