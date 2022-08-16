@@ -2,7 +2,7 @@
 import './App.css';
 
 // React
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // data
 import { wordsList } from './data/words';
@@ -12,12 +12,15 @@ import StartScreen from './components/StartScreen';
 import Game from './components/Game';
 import GameOver from './components/GameOver';
 
-
+// Pages
 const stages = [
   { id: 1, name: 'start' },
   { id: 2, name: 'game' },
   { id: 3, name: 'end' },
 ]
+
+//Guesses Quantity
+const guesssQty = 5
 
 function App() {
 
@@ -31,7 +34,7 @@ function App() {
 
   const [guessedLetters, setGuessedLetters] = useState([])
   const [wrongLetters, setWrongLetters] = useState([])
-  const [guesses, setGuesses] = useState(3)
+  const [guesses, setGuesses] = useState(guesssQty)
   const [score, setScore] = useState(0)
 
   // Generates the category and word randomly
@@ -84,13 +87,37 @@ function App() {
     else {
       setWrongLetters(actualWrongLetter => [...actualWrongLetter, normalizedLetter])
     }
+
+    setGuesses(guesses - 1)
   }
 
-  console.log(guessedLetters)
-  console.log(wrongLetters)
+  const clearLetterStages = () => {
+    setGuessedLetters([])
+    setWrongLetters([])
+  }
+
+  // Whenever const guesses reach to 0, the program switches to "Game Over" page
+  useEffect(() => {
+
+    if (guesses <= 0) {
+
+      // Reset all letters states
+      clearLetterStages()
+
+      // Swicthes to "Game Over" page
+      setGameStage(stages[2].name)
+    }
+  }, [guesses])
+
+  //console.log(guessedLetters)
+  //console.log(wrongLetters)
 
   // Restarts the game
   const retry = () => {
+
+    setScore(0)
+    setGuesses(guesssQty)
+
     setGameStage(stages[0].name)
   }
 
