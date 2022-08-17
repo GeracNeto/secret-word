@@ -11,6 +11,7 @@ import { wordsList } from './data/words';
 import StartScreen from './components/StartScreen';
 import Game from './components/Game';
 import GameOver from './components/GameOver';
+import Footer from './components/Footer';
 
 // Pages
 const stages = [
@@ -37,6 +38,8 @@ function App() {
   const [guesses, setGuesses] = useState(guesssQty)
   const [score, setScore] = useState(0)
 
+  const [lastWord, setLastWord] = useState('')
+
   // Generates the category and word randomly
   const pickWordandCategory = useCallback(() => {
 
@@ -61,6 +64,8 @@ function App() {
     // pick word and pick category
     const { word, category } = pickWordandCategory() // Destructuring 
     console.log(category, word)
+
+    setLastWord(word)
 
     // Create an array of letters
     let wordLetters = word.split('') // Separa as letras da palavra em um array
@@ -126,7 +131,7 @@ function App() {
       setScore(prevScore => prevScore += 100)
 
       // Restart game with new word
-      startGame()
+      setTimeout(() => startGame(), 500)
     }
 
   }, [guessedLetters, letters, startGame, gameStage])
@@ -148,8 +153,8 @@ function App() {
     <div className="App">
       {gameStage === 'start' && <StartScreen startGame={startGame} />}
       {gameStage === 'game' && <Game verifyLetter={verifyLetter} pickedWord={pickedWord} pickedCategory={pickedCategory} letters={letters} guessedLetters={guessedLetters} wrongLetters={wrongLetters} guesses={guesses} score={score} />}
-      {gameStage === 'end' && <GameOver retry={retry} score={score} />}
-
+      {gameStage === 'end' && <GameOver retry={retry} score={score} lastWord={lastWord} />}
+      <Footer />
     </div>
   );
 }

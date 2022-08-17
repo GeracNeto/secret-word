@@ -1,9 +1,11 @@
 .game h1{
     font-size: 2.5em;
+    margin-top: 0;
+
 }
 
-.points span{
-    font-weight: bold;
+.game h3{
+    margin-top: 0;
 }
 
 .tip span{

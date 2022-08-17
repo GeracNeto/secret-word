@@ -1,13 +1,33 @@
 .start h1 {
     font-size: 3.5em;
+    letter-spacing: 2px;
+}
+
+#span-s,
+#span-w {
+    color: #ff6600;
+}
+
+#secret{
+    font-size: 1.2em;
+}
+
+#word{
+    border: 1px unset #030d4f;
+
+
+    background-color: #030d4f;
 }
 
 .start p {
-    margin-bottom: 2em;
+    margin-top: 0;
+    margin-bottom: 1.5em;
+
     color: #ecfa00;
+    font-size: 1.2em;
 }
 
-.start{
+.start {
     display: flex;
     flex-direction: column;
     align-items: center;

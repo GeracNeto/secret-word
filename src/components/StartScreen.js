@@ -16,7 +16,14 @@ const StartScreen = ({ startGame }) => {
 
     return (
         <div className='start'>
-            <h1>Secret Word</h1>
+            <h1>
+                <div id='secret'>
+                    <span id='span-s'>S</span>ecret
+                </div>
+                <div id='word'>
+                    <span id='span-w'>W</span>ord
+                </div>
+            </h1>
             <p>Clique no botão abaixo para começar a jogar</p>
             <button onClick={handleStartGame}>Começar Jogo</button>
             {loadGame && <Loading />}

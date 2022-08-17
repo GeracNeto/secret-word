@@ -4,7 +4,7 @@ import './Game.css'
 // React
 import { useRef, useState } from 'react'
 
-const Game = ({ verifyLetter, pickedWord, pickedCategory, letters, guessedLetters, wrongLetters, guesses, score }) => {
+const Game = ({ verifyLetter, pickedCategory, letters, guessedLetters, wrongLetters, guesses, score }) => {
 
     const [letter, setLetter] = useState('')
 
@@ -36,7 +36,7 @@ const Game = ({ verifyLetter, pickedWord, pickedCategory, letters, guessedLetter
                 {letters.map((letter, i) => guessedLetters.includes(letter) ? (
                     <span key={i} className='letter'>{letter}</span>
                 ) : (
-                    <span key={i} className="blankSquare"></span>
+                    <span key={i} className='blankSquare'></span>
                 ))}
             </div>
             <div className="letterContainer">
