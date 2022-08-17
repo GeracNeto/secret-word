@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Rubik+Dirt&family=Rubik+Iso&display=swap');
+
+*{
+    font-family: 'Josefin Sans', sans-serif;
+}
+
 html,
 body {
     height: 100%;
@@ -25,7 +31,7 @@ button {
     cursor: pointer;
     transition: .4s;
 
-    height: 50px;
+    height: 40px;
     padding: 0 45px;
 
     border: 2px solid #f2f2f2;
