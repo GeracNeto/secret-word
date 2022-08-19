@@ -21,6 +21,6 @@ $ npm install
 ```
 
 # Running
-Run the application with `npm run dev` command, it will start the app:
+Run the application with `npm start` command, it will start the app:
 ```sh
 $ npm start
